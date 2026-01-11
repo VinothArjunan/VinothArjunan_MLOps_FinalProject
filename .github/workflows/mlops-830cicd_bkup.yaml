@@ -44,7 +44,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/vinotharjunan-mlops830ui:latest
 
 # =============================
-# JOB 2: Deploy to Kubernetes
+# JOB 21: Deploy to Kubernetes
 # =============================
   jobs:
     build:
