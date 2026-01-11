@@ -7,7 +7,7 @@ on:
 
 jobs:
   # =============================
-  # JOB 1: Build & Push Images
+  # JOB 1: Build & Push Image
   # =============================
   build:
     name: Build & Push to DockerHub
@@ -103,4 +103,5 @@ jobs:
           kubectl apply -f k8s/api-deployment.yaml
           kubectl apply -f k8s/ui-deployment.yaml
           kubectl rollout status deployment/api-deployment
+
           kubectl rollout status deployment/ui-deployment
