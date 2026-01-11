@@ -43,9 +43,9 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/vinotharjunan-mlops830ui:latest
 
-  # =============================
-  # JOB 2: Deploy to Kubernetes
-  # =============================
+# =============================
+# JOB 2: Deploy to Kubernetes
+# =============================
   deploy:
     name: Deploy to Kubernetes
     runs-on: self-hosted
@@ -55,27 +55,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up kubeconfig
+      - name: Setup kubectl
         env:
-          KUBECONFIG_B64: ${{ secrets.KUBECONFIG }}
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
         run: |
           mkdir -p ~/.kube
-          echo "$KUBECONFIG_B64" | base64 --decode > ~/.kube/config
+          echo "$KUBECONFIG_DATA" | base64 --decode > ~/.kube/config
           chmod 600 ~/.kube/config
-		  
-      - name: Debug kubeconfig
-        env:
-          KUBECONFIG: ~/.kube/config
-        run: |
-          echo "----- kubeconfig -----"
-          cat ~/.kube/config
-          echo "----- contexts -----"
-          kubectl config get-contexts
 
       - name: Deploy to Kubernetes
         env:
           KUBECONFIG: ~/.kube/config
         run: |
-          kubectl cluster-info
           kubectl apply -f k8s/api-deployment.yaml
           kubectl apply -f k8s/ui-deployment.yaml
