@@ -78,10 +78,14 @@ jobs:
       run: echo "UI_VERSION=${{ vars.UI_VERSION }}" >> $GITHUB_ENV
     
     - name: Render manifest API
-      run: envsubst < k8s/api-deployment.yaml > k8s/api-deployment.yaml
+      run: |
+           envsubst < k8s/api-deployment.yaml > k8s/api-deployment.rendered.yaml
+           mv k8s/api-deployment.rendered.yaml k8s/api-deployment.yaml
 
     - name: Render manifest UI
-      run: envsubst < k8s/ui-deployment.yaml > k8s/ui-deployment.yaml
+      run: |
+           envsubst < k8s/ui-deployment.yaml > k8s/ui-deployment.rendered.yaml
+           mv k8s/ui-deployment.rendered.yaml k8s/ui-deployment.yaml
     
     - name: Create AWS secret in Kubernetes
       run: |
