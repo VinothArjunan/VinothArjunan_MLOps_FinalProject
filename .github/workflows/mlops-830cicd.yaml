@@ -61,13 +61,11 @@ jobs:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
         run: |
           echo "===== Setup Kube calling 1====="
-          mkdir -p ~/.kube
-          export KUBECONFIG_DATA="$(cat /tmp/kube.b64)"
-          echo "===== Setup Kube calling 2====="
-          echo "$KUBECONFIG_DATA" | base64 --decode > ~/.kube/config
-          chmod 600 ~/.kube/config
-          export KUBECONFIG=~/.kube/config
-          echo "===== Setup Kube calling 3====="
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG_DATA }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+          echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV       
+          
 
       # -----------------------------
       # Show decoded kubeconfig (NEW)
@@ -85,6 +83,7 @@ jobs:
           KUBECONFIG: ~/.kube/config
         run: |
           echo "----- contexts -----"
+          nl -ba $HOME/.kube/config
           export KUBECONFIG_DATA="$(cat /tmp/kube.b64)"
           printf 'KUBECONFIG_DATA length: %s\n' "${#KUBECONFIG_DATA}"
           echo "$KUBECONFIG_DATA"
@@ -115,6 +114,7 @@ jobs:
           kubectl rollout status deployment/api-deployment
 
           kubectl rollout status deployment/ui-deployment
+
 
 
 
