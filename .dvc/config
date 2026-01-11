@@ -1,0 +1,4 @@
+[core]
+    remote = myremote_vinoth
+['remote "myremote_vinoth"']
+    url = s3://s3mlopsbucketvinoth
