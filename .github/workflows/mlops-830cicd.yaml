@@ -46,9 +46,6 @@ jobs:
 # =============================
 # JOB 2: Deploy to Kubernetes
 # =============================
-jobs:
-  build:
-    ...
   deploy:
     name: Deploy to Kubernetes
     runs-on: self-hosted
@@ -80,4 +77,5 @@ jobs:
           KUBECONFIG: ~/.kube/config
         run: |
           kubectl apply -f k8s/api-deployment.yaml
+
           kubectl apply -f k8s/ui-deployment.yaml
