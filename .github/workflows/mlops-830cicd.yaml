@@ -92,7 +92,7 @@ jobs:
           --dry-run=client -o yaml | kubectl apply -f -
 
     - name: Deploy to Kubernetes API
-      run: kubectl apply -f k8s/api-deployment_rendered.yaml
+      run: kubectl apply -f k8s/api-deployment.yaml
 
     - name: Deploy to Kubernetes UI
-      run: kubectl apply -f k8s/ui-deployment_rendered.yaml
+      run: kubectl apply -f k8s/ui-deployment.yaml
