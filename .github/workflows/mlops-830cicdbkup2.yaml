@@ -77,4 +77,5 @@ deploy:
         KUBECONFIG: ~/.kube/config
       run: |
         kubectl apply -f k8s/api-deployment.yaml
+
         kubectl apply -f k8s/ui-deployment.yaml
