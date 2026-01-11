@@ -51,19 +51,25 @@ jobs:
     name: Deploy to Kubernetes
     runs-on: self-hosted
     needs: build
-
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up kubeconfig
-      env:
-         KUBECONFIG_B64: ${{ secrets.KUBECONFIG }}
-      run: |
-        mkdir -p ~/.kube
-        echo "${KUBECONFIG_B64}" | base64 --decode > ~/.kube/config
+      - name: Set up kubeconfig
+        env:
+          KUBECONFIG_B64: ${{ secrets.KUBECONFIG }}
+        run: |
+          mkdir -p ~/.kube
+          echo "$KUBECONFIG_B64" | base64 --decode > ~/.kube/config
+          chmod 600 ~/.kube/config
 
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f k8s/api-deployment.yaml
-        kubectl apply -f k8s/ui-deployment.yaml
+          - name: Deploy to Kubernetes
+            env:
+            KUBECONFIG: ~/.kube/config
+           run: |
+           kubectl cluster-info
+           kubectl apply -f k8s/api-deployment.yaml
+           kubectl apply -f k8s/ui-deployment.yaml
+
+    
