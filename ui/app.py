@@ -4,14 +4,14 @@ import requests
 # ⚠️ When running locally
 API_URL = "http://localhost:8000/predict"
 
-st.title("Loksai MLOps Feedback Analyzer")
+st.title("Vinoth Arjunan Final Project - MLOps Feedback Analyzer")
 
-text = st.text_area("Enter feedback")
+text = st.text_area("Enter Your feedback :")
 
 if st.button("Analyze"):
 
     if text.strip() == "":
-        st.warning("Please enter some text!")
+        st.warning("Please provide your feedback!")
 
     else: 
         response = requests.post(API_URL, params={"text": text})
