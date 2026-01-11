@@ -88,6 +88,7 @@ jobs:
           export KUBECONFIG_DATA="$(cat /tmp/kube.b64)"
           printf 'KUBECONFIG_DATA length: %s\n' "${#KUBECONFIG_DATA}"
           echo "$KUBECONFIG_DATA"
+          kubectl config use-context kubernetes-admin@kubernetes
           kubectl config get-contexts || true
           echo "----- current context -----"
           kubectl config current-context || true
@@ -114,6 +115,7 @@ jobs:
           kubectl rollout status deployment/api-deployment
 
           kubectl rollout status deployment/ui-deployment
+
 
 
 
