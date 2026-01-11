@@ -59,6 +59,7 @@ jobs:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
         run: |
           mkdir -p ~/.kube
+          export KUBECONFIG_DATA="$(cat /tmp/kube.b64)"
           echo "$KUBECONFIG_DATA" | base64 --decode > ~/.kube/config
           chmod 600 ~/.kube/config
           export KUBECONFIG=~/.kube/config
@@ -105,3 +106,4 @@ jobs:
           kubectl rollout status deployment/api-deployment
 
           kubectl rollout status deployment/ui-deployment
+
