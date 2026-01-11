@@ -29,26 +29,27 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
+        
     # 3️⃣ Build API image
     - name: Build API Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/mlops_e2e_v3-api:${{ vars.API_VERSION }} -f docker/Dockerfile.api .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/loksai-mlops830api:latest -f docker/Dockerfile.api .
 
     # 4️⃣ Build UI image
     - name: Build UI Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/mlops_e2e_v3-ui:${{ vars.UI_VERSION }} -f docker/Dockerfile.ui .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/loksai-mlops830ui:latest -f docker/Dockerfile.ui .
 
     # 5️⃣ Push API image
     - name: Push API image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/mlops_e2e_v3-api:${{ vars.API_VERSION }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/loksai-mlops830api:latest
 
     # 6️⃣ Push UI image
     - name: Push UI image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/mlops_e2e_v3-ui:${{ vars.UI_VERSION }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/loksai-mlops830ui:latest
+
 
   # =============================
   # JOB 2: Deploy to Kubernetes
