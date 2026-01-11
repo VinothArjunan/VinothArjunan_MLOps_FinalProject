@@ -56,10 +56,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup kubectl
+    - name: Set up kubeconfig
       run: |
         mkdir -p ~/.kube
-        echo "${{ secrets.KUBECONFIG_DATA }}" > ~/.kube/config
+        echo "${KUBECONFIG_B64}" | base64 --decode > ~/.kube/config
+        env:
+         KUBECONFIG_B64: ${{ secrets.KUBECONFIG }}
+
 
 
     - name: Deploy to Kubernetes
