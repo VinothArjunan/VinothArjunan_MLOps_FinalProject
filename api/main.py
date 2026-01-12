@@ -7,7 +7,7 @@ import os
 # CHANGE THESE IF NEEDED
 # ---------------------------
 S3_BUCKET = "s3mlopsbucketvinoth"
-S3_KEY = "latest/model.pkl"
+S3_KEY = "files/md5/86/2542cf1e78856731b61011e4c54f6c"
 LOCAL_MODEL_PATH = "models/model.pkl"
 # ---------------------------
 
