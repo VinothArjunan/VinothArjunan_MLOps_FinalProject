@@ -24,7 +24,7 @@ if st.button("Analyze"):
 
             st.markdown(
                 f"""
-                ### 🧠 Prediction Result
+                ### ✍️ Prediction Result
                 **Sentiment:** `{sentiment.capitalize()}`
                 """
             )
